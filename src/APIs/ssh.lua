@@ -23,11 +23,10 @@ function ssh.client:Connect(DeviceId)
     if rednet.send(DeviceId, "ping") == false then error("Error Code: 567") end
     
     local client = {}
-    client.target = DeviceId
     function client.post(lualine)
         if rednet.isOpen() == false then peripheral.find("modem", rednet.open()) end
         data, response = rednet.receive(30)
-        if data == client.target then
+        if data == DeviceId then
             if response == nil then
                 return nil
             else
