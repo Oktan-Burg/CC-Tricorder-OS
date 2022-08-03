@@ -1,2 +1,2 @@
-# CC-Tricorder-OS
-Computercraft OS
+# CC: Tricorder OS
+
