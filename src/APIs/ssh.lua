@@ -19,13 +19,13 @@ function ssh.server:Connect(passKeyLevel, allowedID)
     end
 end
 
-function ssh.client:Connect(number DeviceId)
+function ssh.client:Connect(DeviceId)
     if peripheral.find("modem") == nil then error("This device must have a modem.") end
     peripheral.find("modem", rednet.open())
     if rednet.send(DeviceId, "ping") == false then error("Error Code: 567") end
     
     local client = {}
-    function client.post(string shellline)
+    function client.post(shellline)
         if rednet.isOpen() == false then peripheral.find("modem", rednet.open()) end
         rednet.send(DeviceId, shellline)
         data, response = rednet.receive(30)
