@@ -12,9 +12,11 @@ function ssh.server:Connect(passKeyLevel, allowedID)
         if not message == nil and data == allowedID and passKeyLevel > 0 then
             result = shell.run(message)
             rednet.send(data, result)
+            print("Executing: ".. message)
         elseif not message == nil and passKeyLevel == 0 then
             result = shell.run(message)
             rednet.send(data, result)
+            print("Executing: ".. message)
         end
     end
 end
