@@ -1,5 +1,5 @@
 # Table of Contents
-[GitHub Pages](#Tricorder APIs)
+[Tricorder APIs](https://github.com/Oktan-Burg/CC-Tricorder-OS/blob/main/src/readme.md/#tricorder-apis)
 
 ## Contributers
 MC: Narwin_Tasori | <br>
