@@ -1,11 +1,11 @@
 ssh = {}
 ssh.server = {}
 ssh.client = {}
-
+ 
 -- Functions --
-function ssh.server:Connect(side, passKeyLevel, allowedID)
+function ssh.server:Connect(passKeyLevel, allowedID)
     if peripheral.find("modem") == nil then error("This device must have a modem.") end
-    rednet.open(side)
+    peripheral.find("modem", rednet.open)
     while true do 
         sleep(0.4)
         data, message = rednet.receive(50)
@@ -19,14 +19,14 @@ function ssh.server:Connect(side, passKeyLevel, allowedID)
     end
 end
 
-function ssh.client:Connect(side, DeviceId)
+function ssh.client:Connect(DeviceId)
     if peripheral.find("modem") == nil then error("This device must have a modem.") end
-    rednet.open(side)
+    peripheral.find("modem", rednet.open)
     if rednet.send(DeviceId, "ping") == false then error("Error Code: 567") end
     
     local client = {}
     function client.post(shellline)
-        if rednet.isOpen() == false then rednet.open(side) end
+        if rednet.isOpen() == false then peripheral.find("modem", rednet.open) end
         rednet.send(DeviceId, shellline)
         data, response = rednet.receive(30)
         if data == DeviceId then
