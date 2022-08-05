@@ -20,7 +20,7 @@ end
 function ssh.client:Connect(channel)
     if peripheral.find("modem") == nil then error("This device must have a modem.") end
     peripheral.find("modem", rednet.open)
-    if rednet.send(DeviceId, "ping") == false then error("Error Code: 567") end
+    if rednet.send(channel, "ping") == false then error("Error Code: 567") end
     
     local client = {}
     client.target = channel
@@ -28,7 +28,7 @@ function ssh.client:Connect(channel)
         if rednet.isOpen() == false then peripheral.find("modem", rednet.open) end
         rednet.broadcast(shellline, self.target)
         data, response = rednet.receive(self.target, 30)
-        if data == DeviceId then
+        if data == self.target then
             if response == nil then
                 return nil
             else
